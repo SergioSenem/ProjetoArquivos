@@ -1,0 +1,11 @@
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\bin\Debug\netcoreapp2.1\ProjetoArquivos.deps.json
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\bin\Debug\netcoreapp2.1\ProjetoArquivos.runtimeconfig.json
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\bin\Debug\netcoreapp2.1\ProjetoArquivos.runtimeconfig.dev.json
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\bin\Debug\netcoreapp2.1\ProjetoArquivos.dll
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\obj\Debug\netcoreapp2.1\ProjetoArquivos.csprojAssemblyReference.cache
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\obj\Debug\netcoreapp2.1\ProjetoArquivos.csproj.CoreCompileInputs.cache
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\obj\Debug\netcoreapp2.1\ProjetoArquivos.AssemblyInfoInputs.cache
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\obj\Debug\netcoreapp2.1\ProjetoArquivos.AssemblyInfo.cs
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\bin\Debug\netcoreapp2.1\ProjetoArquivos.pdb
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\obj\Debug\netcoreapp2.1\ProjetoArquivos.dll
+C:\Users\Sergio\source\repos\ProjetoArquivos\ProjetoArquivos\ProjetoArquivos\obj\Debug\netcoreapp2.1\ProjetoArquivos.pdb

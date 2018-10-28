@@ -6,7 +6,12 @@ namespace ProjetoArquivos
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            FileController fc = new FileController();
+
+            fc.WriteFile();
+            //fc.ReadRow();
+
+            Console.ReadKey();
         }
     }
 }

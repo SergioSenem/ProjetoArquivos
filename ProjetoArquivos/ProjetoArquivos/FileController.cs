@@ -7,6 +7,89 @@ namespace ProjetoArquivos
     //Classe que se encarregará de executar as funções de escrita e leitura de arquivos
     public class FileController
     {
+
+        public int WriteFile()
+        {
+            BinaryWriter bw;
+
+            try
+            {
+                if (Directory.Exists("C:/pra_docs"))
+                {
+                    bw = new BinaryWriter(new FileStream("C:/pra_docs/teste.dat", FileMode.Create));
+                }
+                else
+                {
+                    Directory.CreateDirectory("C:/pra_docs");
+                    bw = new BinaryWriter(new FileStream("C:/pra_docs/teste.dat", FileMode.Create));
+                }
+
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine(ex.Message + "\nNão foi possível criar o arquivo!");
+                return 0;
+            }
+
+            Venda venda = Venda.GenerateRandom();
+            string row = Newtonsoft.Json.JsonConvert.SerializeObject(venda);
+            bw.Write(row);
+
+            bw.Close();
+
+            bw = new BinaryWriter(new FileStream("C:/pra_docs/teste.dat", FileMode.Append));
+
+            try
+            {
+                long fileSize = new System.IO.FileInfo("C:/pra_docs/teste.dat").Length;
+                while (fileSize < 1073741824)
+                {
+                    venda = Venda.GenerateRandom();
+                    row = Newtonsoft.Json.JsonConvert.SerializeObject(venda);
+                    bw.Write(row);
+                    fileSize = new System.IO.FileInfo("C:/pra_docs/teste.dat").Length;
+                }
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine(ex.Message + "\nNão foi possível escrever no arquivo!");
+                return 0;
+            }
+
+            bw.Close();
+            return 1;
+        }
+
+        public void ReadRow()
+        {
+            BinaryReader br;
+
+            try
+            {
+                if (Directory.Exists("C:/pra_docs"))
+                {
+                    br = new BinaryReader(new FileStream("C:/pra_docs/teste.dat", FileMode.Open));
+                }
+                else
+                {
+                    Directory.CreateDirectory("C:/pra_docs");
+                    br = new BinaryReader(new FileStream("C:/pra_docs/teste.dat", FileMode.Open));
+                }
+
+                string row = br.ReadString();
+                Venda venda = Newtonsoft.Json.JsonConvert.DeserializeObject<Venda>(row);
+
+                Console.WriteLine(venda.cod_cliente + " / " + venda.cod_vendedor + " / " + venda.itens_comprados);
+
+                br.Close();
+            }
+            catch(IOException ex)
+            {
+                Console.WriteLine(ex.Message + "/nErro ao ler arquivo!");
+            }
+
+        }
+
         #region Ordenacao
 
         //Método inicial para dividir o arquivo
