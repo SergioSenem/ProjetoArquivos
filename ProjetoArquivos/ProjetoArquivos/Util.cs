@@ -1,11 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjetoArquivos
 {
+    public enum FileSizeMode
+    {
+        Kilobyte = 1024,
+        Megabyte = 1048576,
+        Gigabyte = 1073741824
+    }
+
+    public class Constants
+    {
+        public static int FilePage = 50;
+    }
+
     //Classe auxiliar para randomizar uma lista
     public static class Shuffler
     {

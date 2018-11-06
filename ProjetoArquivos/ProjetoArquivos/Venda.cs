@@ -39,6 +39,18 @@ namespace ProjetoArquivos
 
             return result;
         }
+
+        public override string ToString()
+        {
+            string result = "\nCod Cliente: " + this.cod_cliente;
+            result += "\nCod Vendedor: " + this.cod_vendedor;
+            result += "\nData Venda: " + this.data_venda.ToString();
+            result += "\nValor Venda: " + this.valor_venda;
+            result += "\nItens: " + this.itens_comprados;
+            result += "\n------------------------------";
+
+            return result;
+        }
     }
 
 }

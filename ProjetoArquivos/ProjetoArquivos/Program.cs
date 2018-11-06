@@ -1,15 +1,15 @@
 ﻿using System;
 
+//1073741824 -> 1GB
+
 namespace ProjetoArquivos
 {
     class Program
     {
         static void Main(string[] args)
         {
-            FileController fc = new FileController();
-
-            fc.WriteFile();
-            //fc.ReadRow();
+            Interface io = new Interface();
+            io.Start();
 
             Console.ReadKey();
         }

@@ -8,7 +8,49 @@ namespace ProjetoArquivos
     public class FileController
     {
 
-        public int WriteFile()
+        #region Escrita
+        public void WriteFileBySize(long maxFileSize)
+        {
+            if (!Directory.Exists("C:/pra_docs"))
+                Directory.CreateDirectory("C:/pra_docs");
+
+            try
+            {
+                using (BinaryWriter bw = new BinaryWriter(new FileStream("C:/pra_docs/teste.dat", FileMode.Create)))
+                {
+
+                    Venda venda = Venda.GenerateRandom();
+                    string row = Newtonsoft.Json.JsonConvert.SerializeObject(venda);
+                    bw.Write(row);
+
+                    bw.Close();
+
+                }
+
+                using (BinaryWriter bw = new BinaryWriter(new FileStream("C:/pra_docs/teste.dat", FileMode.Append)))
+                {
+
+                    long fileSize = new System.IO.FileInfo("C:/pra_docs/teste.dat").Length;
+                    while (fileSize < maxFileSize)
+                    {
+                        Venda venda = Venda.GenerateRandom();
+                        string row = Newtonsoft.Json.JsonConvert.SerializeObject(venda);
+                        bw.Write(row);
+                        fileSize = new System.IO.FileInfo("C:/pra_docs/teste.dat").Length;
+                    }
+
+                    bw.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public void WriteFileByRow(long rows)
         {
             BinaryWriter bw;
 
@@ -25,10 +67,9 @@ namespace ProjetoArquivos
                 }
 
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
-                Console.WriteLine(ex.Message + "\nNão foi possível criar o arquivo!");
-                return 0;
+                throw new Exception(ex.Message + "\nNão foi possível criar o arquivo!");
             }
 
             Venda venda = Venda.GenerateRandom();
@@ -41,26 +82,57 @@ namespace ProjetoArquivos
 
             try
             {
-                long fileSize = new System.IO.FileInfo("C:/pra_docs/teste.dat").Length;
-                while (fileSize < 1073741824)
+                for (long i = 1; i < rows; i++)
                 {
                     venda = Venda.GenerateRandom();
                     row = Newtonsoft.Json.JsonConvert.SerializeObject(venda);
                     bw.Write(row);
-                    fileSize = new System.IO.FileInfo("C:/pra_docs/teste.dat").Length;
                 }
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
-                Console.WriteLine(ex.Message + "\nNão foi possível escrever no arquivo!");
-                return 0;
+                throw new Exception(ex.Message + "\nNão foi possível escrever no arquivo!");
             }
 
             bw.Close();
-            return 1;
         }
 
-        public void ReadRow()
+        #endregion
+
+        #region Leitura
+
+        //EXEMPLO DE LEITURA DE UMA LINHA
+        //public void ReadRow()
+        //{
+        //    BinaryReader br;
+
+        //    try
+        //    {
+        //        if (Directory.Exists("C:/pra_docs"))
+        //        {
+        //            br = new BinaryReader(new FileStream("C:/pra_docs/teste.dat", FileMode.Open));
+        //        }
+        //        else
+        //        {
+        //            Directory.CreateDirectory("C:/pra_docs");
+        //            br = new BinaryReader(new FileStream("C:/pra_docs/teste.dat", FileMode.Open));
+        //        }
+
+        //        string row = br.ReadString();
+        //        Venda venda = Newtonsoft.Json.JsonConvert.DeserializeObject<Venda>(row);
+
+        //        Console.WriteLine(venda.ToString());
+
+        //        br.Close();
+        //    }
+        //    catch (IOException ex)
+        //    {
+        //        throw new Exception(ex.Message + "/nErro ao ler arquivo!");
+        //    }
+
+        //}
+
+        public void ReadFile()
         {
             BinaryReader br;
 
@@ -72,23 +144,37 @@ namespace ProjetoArquivos
                 }
                 else
                 {
-                    Directory.CreateDirectory("C:/pra_docs");
-                    br = new BinaryReader(new FileStream("C:/pra_docs/teste.dat", FileMode.Open));
+                    throw new Exception("Diretório inexistente!");
                 }
 
-                string row = br.ReadString();
-                Venda venda = Newtonsoft.Json.JsonConvert.DeserializeObject<Venda>(row);
+                int i = 0;
+                while (br.PeekChar() >= 0)
+                {
+                    if (i >= Constants.FilePage)
+                    {
+                        Console.ReadKey();
+                        i = 0;
+                    }
 
-                Console.WriteLine(venda.cod_cliente + " / " + venda.cod_vendedor + " / " + venda.itens_comprados);
+                    string row = br.ReadString();
+                    Venda venda = Newtonsoft.Json.JsonConvert.DeserializeObject<Venda>(row);
+
+                    Console.WriteLine(venda.ToString());
+
+                    i++;
+                }
 
                 br.Close();
             }
-            catch(IOException ex)
+            catch (IOException ex)
             {
-                Console.WriteLine(ex.Message + "/nErro ao ler arquivo!");
+                throw new Exception(ex.Message + "/nErro ao ler arquivo!");
             }
 
+
         }
+
+        #endregion
 
         #region Ordenacao
 
